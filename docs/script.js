@@ -1,37 +1,41 @@
-const candidates = [
-  {key:'speed', files:['assets/visual/speed.jpg','assets/visual/speed.png','assets/visual/speed.jpeg']},
-  {key:'synthetic', files:['assets/visual/synthetic.jpg','assets/visual/synthetic.png','assets/visual/synthetic.jpeg']},
-  {key:'sunlamp', files:['assets/visual/sunlamp.jpg','assets/visual/sunlamp.png','assets/visual/sunlamp.jpeg']},
-  {key:'lightbox', files:['assets/visual/lightbox.jpg','assets/visual/lightbox.png','assets/visual/lightbox.jpeg']}
-];
+const manifest = {
+  speed: [
+    'speed_best_img000192.jpg.png','speed_best_img001079.jpg.png','speed_best_img005589.jpg.png','speed_best_img006658.jpg.png','speed_best_img006732.jpg.png'
+  ],
+  lightbox: [
+    'lightbox_best_img000848.jpg.png','lightbox_best_img000884.jpg.png','lightbox_best_img001483.jpg.png','lightbox_best_img002371.jpg.png','lightbox_best_img003360.jpg.png','lightbox_best_img003905.jpg.png','lightbox_best_img006309.jpg.png','lightbox_best_img006487.jpg.png','lightbox_best_img006638.jpg.png','lightbox_best_img006739.jpg.png'
+  ],
+  synthetic: [],
+  sunlamp: []
+};
 
+const domainSelect = document.getElementById('domain');
 const slide = document.getElementById('slide');
 const caption = document.getElementById('caption');
 const dots = document.getElementById('dots');
-let items = [];
-let idx = 0;
+let files = []; let idx = 0;
 
-function probe(src){
-  return new Promise((resolve)=>{const i=new Image();i.onload=()=>resolve(src);i.onerror=()=>resolve(null);i.src=src;});
-}
+Object.keys(manifest).forEach(d => { const op=document.createElement('option'); op.value=d; op.textContent=d; domainSelect.appendChild(op);});
 
-async function loadItems(){
-  for (const c of candidates){
-    let found=null;
-    for (const f of c.files){found = await probe(f); if(found) break;}
-    if(found) items.push({name:c.key, src:found});
+function srcOf(name){ return `assets/visual/${name}`; }
+function show(i){
+  if(!files.length){
+    slide.src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"><rect width="100%" height="100%" fill="white"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="%23475569" font-size="28">No files listed for this domain yet</text></svg>';
+    caption.textContent = `${domainSelect.value}: please add filenames in docs/script.js manifest`;
+    dots.innerHTML='';
+    return;
   }
-  if(items.length===0){
-    items=[{name:'No images found',src:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500"><rect width="100%" height="100%" fill="white"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23475569" font-size="32">Put images in docs/assets/visual/ as speed|synthetic|sunlamp|lightbox</text></svg>'}];
-  }
-  renderDots();
-  show(0);
+  idx=(i+files.length)%files.length;
+  slide.src = srcOf(files[idx]);
+  slide.alt = files[idx];
+  caption.textContent = files[idx];
+  [...dots.children].forEach((d,n)=>d.classList.toggle('active',n===idx));
 }
+function renderDots(){ dots.innerHTML=''; files.forEach((_,i)=>{const d=document.createElement('span');d.className='dot';d.onclick=()=>show(i);dots.appendChild(d);}); }
+function changeDomain(){ files = manifest[domainSelect.value] || []; idx=0; renderDots(); show(0); }
 
-function show(i){idx=(i+items.length)%items.length; slide.src=items[idx].src; slide.alt=items[idx].name; caption.textContent=items[idx].name; [...dots.children].forEach((d,n)=>d.classList.toggle('active',n===idx));}
-function renderDots(){dots.innerHTML=''; items.forEach((_,i)=>{const d=document.createElement('span');d.className='dot';d.onclick=()=>show(i);dots.appendChild(d);});}
-
-document.getElementById('prev').onclick=()=>show(idx-1);
-document.getElementById('next').onclick=()=>show(idx+1);
-setInterval(()=>show(idx+1), 3500);
-loadItems();
+domainSelect.addEventListener('change', changeDomain);
+document.getElementById('prev').onclick = ()=>show(idx-1);
+document.getElementById('next').onclick = ()=>show(idx+1);
+setInterval(()=>show(idx+1), 3000);
+changeDomain();
