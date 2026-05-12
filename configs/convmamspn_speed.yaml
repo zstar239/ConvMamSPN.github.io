@@ -1,0 +1,14 @@
+project: ConvMamSPN
+dataset: SPEED
+data_root: ./datasets/SPEED
+output_dir: ./results/convmamspn_speed
+device: cuda
+num_workers: 4
+train:
+  epochs: 100
+  batch_size: 16
+  lr: 0.0001
+model:
+  backbone: convnext
+  decoder: mamba_hierarchical
+  keypoints: TODO
