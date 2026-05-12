@@ -1,62 +1,45 @@
-const owner = 'zstar239';
-const repo = 'ConvMamSPN.github.io';
-const branch = 'main';
-const path = 'docs/assets/visual';
-const domains = ['speed', 'synthetic', 'sunlamp', 'lightbox'];
-const manifest = { speed: [], synthetic: [], sunlamp: [], lightbox: [] };
-let currentDomain = 'speed';
-let idx = 0;
+const owner='zstar239', repo='ConvMamSPN.github.io', branch='main', path='docs/assets/visual';
+const domains=['speed','synthetic','sunlamp','lightbox'];
+const manifest={speed:[],synthetic:[],sunlamp:[],lightbox:[]};
+const state={};
 
-const select = document.getElementById('domain');
-const slide = document.getElementById('slide');
-const caption = document.getElementById('caption');
-const dots = document.getElementById('dots');
-
-domains.forEach(d => { const o = document.createElement('option'); o.value=d; o.textContent=d; select.appendChild(o); });
-
-async function fetchFiles() {
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('Failed to fetch visual file list');
-  const files = await res.json();
-  files.filter(f => f.type === 'file').forEach(f => {
-    const name = f.name.toLowerCase();
-    for (const d of domains) {
-      if (name.startsWith(`${d}_`) || name.includes(`${d}_best_`)) manifest[d].push(f.name);
-    }
+async function fetchFiles(){
+  const url=`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+  const res=await fetch(url); if(!res.ok) throw new Error('fetch failed');
+  const files=await res.json();
+  files.filter(f=>f.type==='file').forEach(f=>{
+    const n=f.name.toLowerCase();
+    domains.forEach(d=>{ if(n.includes(d)) manifest[d].push(f.name); });
   });
-  domains.forEach(d => manifest[d].sort());
+  domains.forEach(d=>manifest[d].sort());
 }
 
-function srcOf(file) { return `assets/visual/${file}`; }
-function renderDots(list) {
-  dots.innerHTML = '';
-  list.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.className = 'dot';
-    dot.onclick = () => show(i);
-    dots.appendChild(dot);
-  });
-}
-function show(i) {
-  const list = manifest[currentDomain];
-  if (!list || list.length === 0) {
-    slide.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500"><rect width="100%" height="100%" fill="white"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23475569" font-size="24">No images found for this domain</text></svg>';
-    caption.textContent = `${currentDomain}: no files detected`;
-    dots.innerHTML = '';
-    return;
-  }
-  idx = (i + list.length) % list.length;
-  slide.src = srcOf(list[idx]);
-  slide.alt = list[idx];
-  caption.textContent = `${currentDomain} — ${list[idx]}`;
-  [...dots.children].forEach((d, n) => d.classList.toggle('active', n === idx));
-}
-function changeDomain(d) { currentDomain = d; idx = 0; renderDots(manifest[d]); show(0); }
+function buildDomainCard(domain){
+  const el=document.createElement('article'); el.className='domain';
+  el.innerHTML=`<h3>${domain}</h3><div class='viewer'><button class='nav prev'>‹</button><img><button class='nav next'>›</button></div><div class='cap'></div><div class='dots'></div>`;
+  const img=el.querySelector('img'), cap=el.querySelector('.cap'), dots=el.querySelector('.dots');
+  state[domain]={idx:0,img,cap,dots};
 
-select.addEventListener('change', e => changeDomain(e.target.value));
-document.getElementById('prev').onclick = () => show(idx - 1);
-document.getElementById('next').onclick = () => show(idx + 1);
-setInterval(() => show(idx + 1), 3500);
+  const renderDots=()=>{dots.innerHTML='';(manifest[domain]||[]).forEach((_,i)=>{const d=document.createElement('span');d.className='dot';if(i===state[domain].idx)d.classList.add('active');d.onclick=()=>show(domain,i);dots.appendChild(d);});};
+  el.querySelector('.prev').onclick=()=>show(domain,state[domain].idx-1);
+  el.querySelector('.next').onclick=()=>show(domain,state[domain].idx+1);
+  renderDots();
+  return el;
+}
 
-fetchFiles().then(() => changeDomain('speed')).catch(() => changeDomain('speed'));
+function show(domain,i){
+  const list=manifest[domain]||[]; const s=state[domain];
+  if(!list.length){s.img.src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420"><rect width="100%" height="100%" fill="white"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="%2364758b" font-size="24">No '+domain+' images found</text></svg>'; s.cap.textContent='No files matched domain name.'; s.dots.innerHTML=''; return;}
+  s.idx=(i+list.length)%list.length; s.img.src=`assets/visual/${list[s.idx]}`; s.cap.textContent=list[s.idx];
+  [...s.dots.children].forEach((d,n)=>d.classList.toggle('active',n===s.idx));
+}
+
+async function init(){
+  const quad=document.getElementById('quad');
+  domains.forEach(d=>quad.appendChild(buildDomainCard(d)));
+  try{await fetchFiles();}catch(e){console.warn(e);} 
+  domains.forEach(d=>show(d,0));
+  setInterval(()=>domains.forEach(d=>show(d,state[d].idx+1)),3500);
+}
+
+init();
