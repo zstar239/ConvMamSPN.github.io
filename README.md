@@ -34,6 +34,11 @@ Notes / 说明：
 **No shell scripts are used in this project.**  
 **本项目不使用任何 `sh` 脚本进行训练。**
 
+Do **NOT** use:
+- `bash scripts/train_convmamspn.sh`
+- `bash scripts/test_convmamspn.sh`
+- `bash scripts/train_uggp_st.sh`
+
 Use Python entry files directly:
 
 ```bash
