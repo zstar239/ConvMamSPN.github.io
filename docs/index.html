@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConvMamSPN + UGGP-ST</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1>ConvMamSPN + UGGP-ST</h1>
+    <p class="subtitle">Mamba-based Spacecraft 6D Pose Estimation with Uncertainty-Guided Geometric Pseudo-label Self-Training</p>
+    <p class="authors">Zeng Xin et al.</p>
+  </header>
+
+  <main class="container">
+    <section><h2>Abstract</h2><p>We present a unified framework for spacecraft 6D pose estimation and synthetic-to-real adaptation. ConvMamSPN predicts keypoint heatmaps from spacecraft images using a ConvNeXt backbone and a Mamba-based hierarchical decoder, then recovers 6D pose with geometric PnP. UGGP-ST improves target-domain generalization by teacher-student self-training with uncertainty-guided geometric consistency.</p></section>
+
+    <section><h2>Method Overview</h2><img src="assets/method_overview.svg" alt="Method Overview" /><p>ConvMamSPN extracts hierarchical features and predicts keypoint heatmaps, then solves pose with PnP. UGGP-ST performs online teacher pseudo-label supervision for robust domain adaptation.</p></section>
+
+    <section class="grid2">
+      <div><h2>ConvMamSPN</h2><ul><li>ConvNeXt backbone</li><li>CrossScanMamba</li><li>MambaResBlock</li><li>Hierarchical decoder</li><li>Keypoint heatmaps + PnP</li></ul></div>
+      <div><h2>UGGP-ST</h2><ul><li>Online teacher pseudo labels</li><li>Uncertainty-aware confidence</li><li>Geometric consistency</li><li>Teacher-student optimization</li></ul></div>
+    </section>
+
+    <section><h2>Results (Placeholder)</h2><table><tr><th>Method</th><th>Domain</th><th>SPEED_t</th><th>SPEED_r</th><th>SPEED</th></tr><tr><td>Source-only</td><td>Lightbox</td><td>TODO</td><td>TODO</td><td>TODO</td></tr><tr><td>ConvMamSPN + UGGP-ST</td><td>Lightbox</td><td>TODO</td><td>TODO</td><td>TODO</td></tr><tr><td>Source-only</td><td>Sunlamp</td><td>TODO</td><td>TODO</td><td>TODO</td></tr><tr><td>ConvMamSPN + UGGP-ST</td><td>Sunlamp</td><td>TODO</td><td>TODO</td><td>TODO</td></tr></table></section>
+
+    <section>
+      <h2>4-Domain Pose Visualization Carousel</h2>
+      <p class="subtitle">Parallel sliders for speed / synthetic / sunlamp / lightbox.</p>
+      <div class="quad" id="quad"></div>
+    </section>
+  </main>
+
+  <footer>© 2026 ConvMamSPN + UGGP-ST Project. Built with GitHub Pages.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
