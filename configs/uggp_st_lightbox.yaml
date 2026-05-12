@@ -1,0 +1,8 @@
+project: UGGP-ST
+source_dataset: SPEED+
+target_domain: lightbox
+data_root: ./datasets/SPEED+
+source_ckpt: ./checkpoints/convmamspn_source.pth
+pseudo_label_dir: ./results/pseudo_labels/lightbox
+output_dir: ./results/uggp_st_lightbox
+device: cuda
