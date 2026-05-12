@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# Training logs and experiment artifacts
+runs/
+wandb/
+logs/
+log/
+output/
+outputs/
+results/tmp/
+
+# Large model files
+checkpoints/*.pth
+checkpoints/*.pt
+checkpoints/*.ckpt
+
+# Datasets (keep only README in repo)
+datasets/*
+!datasets/README.md
+
+# Archives and binaries
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.npy
+*.npz
+*.pkl
+*.onnx
+*.engine
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
