@@ -1,0 +1,13 @@
+body{margin:0;font-family:Arial,sans-serif;background:#f5f8fc;color:#0f172a}
+.wrap{max-width:1000px;margin:32px auto;padding:0 16px}
+h1{font-size:48px;margin:0 0 10px}.sub{color:#475569}
+.panel{background:#fff;border:1px solid #dbe4f0;border-radius:14px;padding:16px 18px;margin-top:16px}
+ul{margin:8px 0 0 18px}.toolbar{margin:10px 0}
+select{padding:6px 10px;border-radius:8px;border:1px solid #cbd5e1}
+.carousel{display:grid;grid-template-columns:52px 1fr 52px;gap:10px;align-items:center;margin-top:10px}
+figure{margin:0}img{width:100%;max-height:560px;object-fit:contain;border-radius:8px;border:1px solid #e2e8f0;background:#fff}
+figcaption{margin-top:8px;color:#334155;font-weight:600;word-break:break-all}
+.nav{height:42px;border:none;border-radius:999px;background:#2563eb;color:#fff;font-size:28px;cursor:pointer}
+.nav:hover{background:#1d4ed8}
+.dots{margin-top:12px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.dot{width:10px;height:10px;border-radius:50%;background:#cbd5e1;cursor:pointer}.dot.active{background:#2563eb}
