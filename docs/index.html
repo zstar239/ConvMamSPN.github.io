@@ -1,38 +1,308 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ConvMamSPN + UGGP-ST: Uncertainty-Guided Geometric Pseudo-label Self-Training for Monocular Non-cooperative Spacecraft Pose Estimation with ConvMamSPN" />
+  <meta name="theme-color" content="#0b2a5b" />
   <title>ConvMamSPN + UGGP-ST</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=4" />
 </head>
 <body>
-  <header class="hero">
-    <h1>ConvMamSPN + UGGP-ST</h1>
-    <p class="subtitle">Mamba-based Spacecraft 6D Pose Estimation with Uncertainty-Guided Geometric Pseudo-label Self-Training</p>
-    <p class="authors">Zeng Xin et al.</p>
+  <header class="site-header" id="top">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="ConvMamSPN + UGGP-ST home">
+        <span class="brand-mark">C</span>
+        <span>ConvMamSPN + UGGP-ST</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="#highlights">Highlights</a>
+        <a href="#method">Method</a>
+        <a href="#visualization">Visualization</a>
+        <a href="#results">Results</a>
+        <a href="#citation">BibTeX</a>
+      </div>
+    </nav>
+
+    <section class="hero section-narrow">
+      <div class="tagline">Monocular Spacecraft 6D Pose Estimation under Synthetic-to-Real Domain Shift</div>
+      <h1>ConvMamSPN + UGGP-ST</h1>
+      <p class="subtitle">
+        Uncertainty-Guided Geometric Pseudo-label Self-Training for Monocular Non-cooperative Spacecraft Pose Estimation with ConvMamSPN
+      </p>
+      <p class="authors">
+        <strong>ZX</strong> et al.
+      </p>
+      <p class="affiliation">Computer Vision · Space Intelligent Perception · Spacecraft Pose Estimation</p>
+
+      <div class="action-row" aria-label="Project links">
+        <a class="btn primary" href="#" aria-label="Paper link">Paper</a>
+        <a class="btn" href="https://github.com/zstar239/ConvMamSPN.github.io/tree/main" aria-label="Code link">Code</a>
+        <a class="btn" href="https://github.com/zstar239/ConvMamSPN.github.io/tree/main/checkpoints" aria-label="Model link">Model</a>
+        <a class="btn" href="https://github.com/zstar239/ConvMamSPN.github.io/blob/main/README.md" aria-label="Dataset link">Dataset</a>
+        <a class="btn" href="#citation" aria-label="BibTeX link">BibTeX</a>
+      </div>
+
+      <div class="hero-card">
+        <img src="assets/method_overview.png" alt="ConvMamSPN and UGGP-ST method overview" />
+      </div>
+    </section>
   </header>
 
-  <main class="container">
-    <section><h2>Abstract</h2><p>We present a unified framework for spacecraft 6D pose estimation and synthetic-to-real adaptation. ConvMamSPN predicts keypoint heatmaps from spacecraft images using a ConvNeXt backbone and a Mamba-based hierarchical decoder, then recovers 6D pose with geometric PnP. UGGP-ST improves target-domain generalization by teacher-student self-training with uncertainty-guided geometric consistency.</p></section>
-
-    <section><h2>Method Overview</h2><img src="assets/method_overview.svg" alt="Method Overview" /><p>ConvMamSPN extracts hierarchical features and predicts keypoint heatmaps, then solves pose with PnP. UGGP-ST performs online teacher pseudo-label supervision for robust domain adaptation.</p></section>
-
-    <section class="grid2">
-      <div><h2>ConvMamSPN</h2><ul><li>ConvNeXt backbone</li><li>CrossScanMamba</li><li>MambaResBlock</li><li>Hierarchical decoder</li><li>Keypoint heatmaps + PnP</li></ul></div>
-      <div><h2>UGGP-ST</h2><ul><li>Online teacher pseudo labels</li><li>Uncertainty-aware confidence</li><li>Geometric consistency</li><li>Teacher-student optimization</li></ul></div>
+  <main>
+    <section id="highlights" class="section section-narrow">
+      <div class="section-title">
+        <span class="eyebrow">Overview</span>
+        <h2>Highlights</h2>
+      </div>
+      <div class="highlight-grid">
+        <article class="highlight-card">
+          <div class="icon-chip">01</div>
+          <h3>Mamba-based Pose Network</h3>
+          <p>ConvMamSPN combines a ConvNeXt visual backbone with a Mamba-based hierarchical decoder for accurate spacecraft keypoint heatmap prediction.</p>
+        </article>
+        <article class="highlight-card">
+          <div class="icon-chip">02</div>
+          <h3>Directional Context Modeling</h3>
+          <p>CrossScanMamba enhances long-range spatial dependency modeling by scanning feature maps across complementary directions.</p>
+        </article>
+        <article class="highlight-card">
+          <div class="icon-chip">03</div>
+          <h3>Geometry-guided Recovery</h3>
+          <p>Predicted 2D keypoints are combined with predefined 3D keypoints, and the 6D pose is recovered through PnP-based geometric solving.</p>
+        </article>
+        <article class="highlight-card">
+          <div class="icon-chip">04</div>
+          <h3>Reliable Pseudo Labels</h3>
+          <p>UGGP-ST filters pseudo labels using heatmap uncertainty and PnP reprojection consistency to reduce noisy target-domain supervision.</p>
+        </article>
+      </div>
     </section>
 
-    <section><h2>Results (Placeholder)</h2><table><tr><th>Method</th><th>Domain</th><th>SPEED_t</th><th>SPEED_r</th><th>SPEED</th></tr><tr><td>Source-only</td><td>Lightbox</td><td>TODO</td><td>TODO</td><td>TODO</td></tr><tr><td>ConvMamSPN + UGGP-ST</td><td>Lightbox</td><td>TODO</td><td>TODO</td><td>TODO</td></tr><tr><td>Source-only</td><td>Sunlamp</td><td>TODO</td><td>TODO</td><td>TODO</td></tr><tr><td>ConvMamSPN + UGGP-ST</td><td>Sunlamp</td><td>TODO</td><td>TODO</td><td>TODO</td></tr></table></section>
+    <section id="abstract" class="section section-narrow">
+      <div class="section-title">
+        <span class="eyebrow">Paper Introduction</span>
+        <h2>Abstract</h2>
+      </div>
+      <div class="prose-card">
+        <p>
+          Spacecraft 6D pose estimation is a fundamental task for non-cooperative space target perception, autonomous rendezvous, and on-orbit servicing. However, spacecraft images often suffer from weak textures, large scale variation, complex illumination, and significant synthetic-to-real domain gaps. To address these challenges, we propose <strong>ConvMamSPN</strong>, a Mamba-based keypoint pose estimation network, and <strong>UGGP-ST</strong>, an uncertainty-guided geometric pseudo-label self-training framework.
+        </p>
+        <p>
+          ConvMamSPN predicts spacecraft keypoint heatmaps using a ConvNeXt backbone and a Mamba-based hierarchical decoder. The final 6D pose is recovered using geometric PnP. UGGP-ST further improves target-domain robustness by selecting reliable pseudo labels through keypoint uncertainty estimation and PnP reprojection consistency, enabling effective teacher-student self-training on unlabeled real-domain images.
+        </p>
+      </div>
+    </section>
 
-    <section>
-      <h2>4-Domain Pose Visualization Carousel</h2>
-      <p class="subtitle">Parallel sliders for speed / synthetic / sunlamp / lightbox.</p>
-      <div class="quad" id="quad"></div>
+    <section id="method" class="section section-wide">
+      <div class="section-title section-narrow">
+        <span class="eyebrow">Method</span>
+        <h2>ConvMamSPN and UGGP-ST</h2>
+        <p class="section-lead">The framework integrates network-based keypoint localization, geometry-based pose recovery, and uncertainty-guided target-domain adaptation.</p>
+      </div>
+
+      <div class="method-layout section-narrow">
+        <article class="method-card">
+          <h3>ConvMamSPN</h3>
+          <p>
+            ConvMamSPN is an encoder-decoder network for monocular spacecraft 6D pose estimation. It extracts hierarchical visual features with a ConvNeXt backbone and refines multi-scale decoder features with CrossScanMamba and MambaResBlock modules. The network outputs keypoint heatmaps, from which high-confidence 2D keypoints are selected for geometric PnP pose recovery.
+          </p>
+          <ul class="clean-list">
+            <li>ConvNeXt backbone for hierarchical visual representation.</li>
+            <li>Mamba-based decoder for global-local feature refinement.</li>
+            <li>Top-M keypoint selection for robust geometric solving.</li>
+            <li>EPnP / RANSAC PnP for interpretable 6D pose recovery.</li>
+          </ul>
+        </article>
+        <article class="method-card">
+          <h3>UGGP-ST</h3>
+          <p>
+            UGGP-ST addresses the synthetic-to-real domain gap by generating and selecting reliable pseudo labels from unlabeled target-domain images. Instead of relying only on heatmap peak confidence, it jointly considers heatmap uncertainty and PnP reprojection consistency, reducing error accumulation during teacher-student self-training.
+          </p>
+          <ul class="clean-list">
+            <li>Peak confidence, entropy, and local variance uncertainty cues.</li>
+            <li>Geometric validation based on PnP consensus and reprojection error.</li>
+            <li>Teacher-student self-training on Lightbox and Sunlamp domains.</li>
+            <li>Improved robustness under illumination and background shifts.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="figure-stack section-narrow">
+        <figure class="paper-figure">
+          <img src="assets/convmamspn_architecture.png" alt="ConvMamSPN architecture" loading="lazy" />
+          <figcaption><strong>ConvMamSPN architecture.</strong> A ConvNeXt backbone and Mamba-based hierarchical decoder predict spacecraft keypoint heatmaps for PnP-based pose recovery.</figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="assets/uggp_st_pipeline.png" alt="UGGP-ST pseudo-label self-training pipeline" loading="lazy" />
+          <figcaption><strong>UGGP-ST pipeline.</strong> Uncertainty and geometric consistency are jointly used to select reliable pseudo labels for target-domain self-training.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="visualization" class="section section-narrow">
+      <div class="section-title">
+        <span class="eyebrow">Qualitative Visualization</span>
+        <h2>Four-domain Result Carousel</h2>
+        <p class="section-lead">
+          Qualitative predictions are shown across SPEED, SPEED+ Synthetic, Lightbox, and Sunlamp domains.
+          Each card independently rotates examples to illustrate robustness under synthetic-to-real appearance shifts.
+        </p>
+      </div>
+      <div id="visualGrid" class="visual-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="results" class="section section-narrow">
+      <div class="section-title">
+        <span class="eyebrow">Experiments</span>
+        <h2>Results</h2>
+      </div>
+      <div class="table-wrap sota-table-wrap compact-sota-wrap">
+        <table class="sota-table compact-sota-table">
+          <caption>
+            Comparison with state-of-the-art methods on the SPEED+ dataset. Only A<sub>score</sub> is shown for each domain for a compact project-page display.
+          </caption>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Params(M) ↓</th>
+              <th>FLOPs(G) ↓</th>
+              <th>Lightbox<br><span class="metric-note">A<sub>score</sub> ↓</span></th>
+              <th>Sunlamp<br><span class="metric-note">A<sub>score</sub> ↓</span></th>
+              <th>Synthetic<br><span class="metric-note">A<sub>score</sub> ↓</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>VPU</td>
+              <td>190.07</td>
+              <td>273.36</td>
+              <td>0.1014</td>
+              <td><span class="u">0.0612</span></td>
+              <td><span class="u">0.039</span></td>
+            </tr>
+            <tr>
+              <td>SPNv2</td>
+              <td>56.92</td>
+              <td><span class="u">142.54</span></td>
+              <td>0.122</td>
+              <td>0.198</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <td>laval1302</td>
+              <td>–</td>
+              <td>–</td>
+              <td>0.1627</td>
+              <td><span class="u">0.0545</span></td>
+              <td><span class="u">0.04</span></td>
+            </tr>
+            <tr>
+              <td>KPN</td>
+              <td>–</td>
+              <td>–</td>
+              <td>0.810</td>
+              <td>1.320</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <td>SPTN</td>
+              <td>–</td>
+              <td>–</td>
+              <td>0.098</td>
+              <td>0.156</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <td>TSTF</td>
+              <td>–</td>
+              <td>–</td>
+              <td>0.095</td>
+              <td>0.197</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <td>PVSPE</td>
+              <td>73.09</td>
+              <td><span class="u">104.12</span></td>
+              <td>0.101</td>
+              <td>0.178</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <td>PVSAR</td>
+              <td><span class="u">30.60</span></td>
+              <td>–</td>
+              <td>0.076</td>
+              <td>0.112</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <td>SPNv3-S<sup>†</sup></td>
+              <td><span class="u">22.70</span></td>
+              <td>–</td>
+              <td>0.064</td>
+              <td>0.088</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <td>SPNv3-M<sup>†</sup></td>
+              <td>39.60</td>
+              <td>–</td>
+              <td><span class="u">0.056</span></td>
+              <td>0.082</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <td>SPNv3-B<sup>†</sup></td>
+              <td>86.30</td>
+              <td>–</td>
+              <td><span class="u">0.047</span></td>
+              <td>0.074</td>
+              <td>–</td>
+            </tr>
+            <tr class="ours-row">
+              <td>ConvMamSPN + UGGP-ST <span class="ours-tag">Ours</span></td>
+              <td><strong>13.97</strong></td>
+              <td><strong>23.87</strong></td>
+              <td><strong>0.0297</strong></td>
+              <td><strong>0.0465</strong></td>
+              <td><strong>0.0121</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        <sup>†</sup> denotes results reported with an ensemble of heatmap predictions from models trained in three independent sessions, following the original paper.
+        Best results are shown in bold, and second-best results are underlined.
+      </p>
+    </section>
+
+    <section id="citation" class="section section-narrow">
+      <div class="section-title">
+        <span class="eyebrow">Citation</span>
+        <h2>BibTeX</h2>
+      </div>
+      <div class="code-card">
+        <button class="copy-btn" type="button" data-copy-target="bibtexBlock">Copy</button>
+<pre id="bibtexBlock"><code>@article{TODO,
+  title   = {TODO},
+  author  = {TODO},
+  journal = {TODO},
+  year    = {2026}
+}</code></pre>
+      </div>
     </section>
   </main>
 
-  <footer>© 2026 ConvMamSPN + UGGP-ST Project. Built with GitHub Pages.</footer>
-  <script src="script.js"></script>
+  <footer class="footer">
+    <div class="section-narrow footer-inner">
+      <p>© <span id="year"></span> ConvMamSPN + UGGP-ST Project. Built with GitHub Pages.</p>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js?v=4"></script>
 </body>
 </html>

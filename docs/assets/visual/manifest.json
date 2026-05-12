@@ -1,0 +1,76 @@
+{
+  "domains": [
+    {
+      "id": "speed",
+      "title": "SPEED",
+      "subtitle": "Synthetic source-domain results",
+      "description": "Predictions on synthetic spacecraft images with precise pose annotations.",
+      "images": [
+        "speed_best_img000192.jpg.png",
+        "speed_best_img001079.jpg.png",
+        "speed_best_img005589.jpg.png",
+        "speed_best_img006658.jpg.png",
+        "speed_best_img006732.jpg.png",
+        "speed_best_img007889.jpg.png",
+        "speed_best_img008966.jpg.png",
+        "speed_best_img009464.jpg.png",
+        "speed_best_img012234.jpg.png",
+        "speed_best_img013532.jpg.png"
+      ]
+    },
+    {
+      "id": "synthetic",
+      "title": "SPEED+ Synthetic",
+      "subtitle": "Synthetic training-domain visualization",
+      "description": "Predictions on synthetic spacecraft images.",
+      "images": [
+        "synthetic_best_img002848.jpg.png",
+        "synthetic_best_img002878.jpg.png",
+        "synthetic_best_img003077.jpg.png",
+        "synthetic_best_img003157.jpg.png",
+        "synthetic_best_img003200.jpg.png",
+        "synthetic_best_img003261.jpg.png",
+        "synthetic_best_img032827.jpg.png",
+        "synthetic_best_img032902.jpg.png",
+        "synthetic_best_img053030.jpg.png",
+        "synthetic_best_img058328.jpg.png"
+      ]
+    },
+    {
+      "id": "lightbox",
+      "title": "SPEED+ Lightbox",
+      "subtitle": "Real target-domain results",
+      "description": "Qualitative results under the Lightbox domain with background and illumination shift.",
+      "images": [
+        "lightbox_best_img000848.jpg.png",
+        "lightbox_best_img000884.jpg.png",
+        "lightbox_best_img001483.jpg.png",
+        "lightbox_best_img002371.jpg.png",
+        "lightbox_best_img003360.jpg.png",
+        "lightbox_best_img003905.jpg.png",
+        "lightbox_best_img006309.jpg.png",
+        "lightbox_best_img006487.jpg.png",
+        "lightbox_best_img006638.jpg.png",
+        "lightbox_best_img006739.jpg.png"
+      ]
+    },
+    {
+      "id": "sunlamp",
+      "title": "SPEED+ Sunlamp",
+      "subtitle": "Real target-domain results",
+      "description": "Qualitative results under strong illumination and severe appearance shift.",
+      "images": [
+        "sunlamp_best_img000342.jpg.png",
+        "sunlamp_best_img000418.jpg.png",
+        "sunlamp_best_img000524.jpg.png",
+        "sunlamp_best_img001264.jpg.png",
+        "sunlamp_best_img001542.jpg.png",
+        "sunlamp_best_img001571.jpg.png",
+        "sunlamp_best_img001732.jpg.png",
+        "sunlamp_best_img001878.jpg.png",
+        "sunlamp_best_img001957.jpg.png",
+        "sunlamp_best_img002641.jpg.png"
+      ]
+    }
+  ]
+}

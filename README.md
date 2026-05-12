@@ -1,5 +1,7 @@
 # Uncertainty-Guided Geometric Pseudo-label Self-Training for Monocular Non-cooperative Spacecraft Pose Estimation with ConvMamSPN
 
+- This project currently only includes the complete project structure and placeholder code, and the complete code will be released after the paper is accepted.
+
 ## Environment Setup / 环境配置
 
 Please set up the environment according to `environment.yml`:
@@ -31,13 +33,6 @@ Notes / 说明：
 
 ## Training ConvMamSPN / 训练 ConvMamSPN
 
-**No shell scripts are used in this project.**  
-**本项目不使用任何 `sh` 脚本进行训练。**
-
-Do **NOT** use:
-- `bash scripts/train_convmamspn.sh`
-- `bash scripts/test_convmamspn.sh`
-- `bash scripts/train_uggp_st.sh`
 
 Use Python entry files directly:
 
