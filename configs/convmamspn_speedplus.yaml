@@ -1,0 +1,10 @@
+project: ConvMamSPN
+dataset: SPEED+
+data_root: ./datasets/SPEED+
+output_dir: ./results/convmamspn_speedplus
+device: cuda
+test:
+  batch_size: 16
+checkpoint: ./checkpoints/convmamspn.pth
+pnp:
+  solver: epnp_ransac
