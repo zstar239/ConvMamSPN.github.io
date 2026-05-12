@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConvMamSPN + UGGP-ST</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1>ConvMamSPN + UGGP-ST</h1>
+    <p class="subtitle">Mamba-based Spacecraft 6D Pose Estimation with Uncertainty-Guided Geometric Pseudo-label Self-Training</p>
+    <p class="authors">Zeng Xin et al.</p>
+    <div class="buttons">
+      <a href="#">Paper</a>
+      <a id="code-btn" href="https://github.com/zstar239/ConvMamSPN.github.io" target="_blank" rel="noopener">Code (GitHub)</a>
+      <a href="#">Dataset</a>
+      <a href="#">Model</a>
+      <a href="#bibtex">BibTeX</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h2>Abstract</h2>
+      <p>ConvMamSPN predicts spacecraft keypoint heatmaps using a ConvNeXt encoder and Mamba-based hierarchical decoder, then recovers 6D pose with geometric PnP. UGGP-ST improves synthetic-to-real transfer by uncertainty-guided pseudo-label filtering and teacher-student self-training, targeting SPEED+ Lightbox and Sunlamp.</p>
+    </section>
+
+    <section class="section">
+      <h2>Method Overview</h2>
+      <img src="assets/method_overview.svg" alt="Method Overview" />
+    </section>
+
+    <section class="section grid">
+      <div>
+        <h2>ConvMamSPN</h2>
+        <ul><li>ConvNeXt backbone</li><li>CrossScanMamba</li><li>MambaResBlock</li><li>Hierarchical decoding</li><li>Keypoint heatmap prediction</li><li>EPnP/RANSAC PnP pose recovery</li></ul>
+      </div>
+      <div>
+        <h2>UGGP-ST</h2>
+        <ul><li>Heatmap peak confidence</li><li>Entropy/local-variance uncertainty</li><li>PnP reprojection consistency</li><li>Pseudo-label filtering</li><li>Teacher-student self-training</li></ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Results (TODO)</h2>
+      <table>
+        <tr><th>Method</th><th>Domain</th><th>SPEED_t</th><th>SPEED_r</th><th>SPEED</th></tr>
+        <tr><td>Source-only</td><td>Lightbox</td><td>TODO</td><td>TODO</td><td>TODO</td></tr>
+        <tr><td>ConvMamSPN + UGGP-ST</td><td>Lightbox</td><td>TODO</td><td>TODO</td><td>TODO</td></tr>
+        <tr><td>Source-only</td><td>Sunlamp</td><td>TODO</td><td>TODO</td><td>TODO</td></tr>
+        <tr><td>ConvMamSPN + UGGP-ST</td><td>Sunlamp</td><td>TODO</td><td>TODO</td><td>TODO</td></tr>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Visual Gallery</h2>
+      <div class="cards">
+        <figure><img src="assets/architecture.svg" alt="architecture"/><figcaption>ConvMamSPN Architecture</figcaption></figure>
+        <figure><img src="assets/uggp_st_pipeline.svg" alt="pipeline"/><figcaption>UGGP-ST Pipeline</figcaption></figure>
+        <figure><img src="assets/keypoint_visualization.svg" alt="keypoint"/><figcaption>Keypoint Heatmaps</figcaption></figure>
+        <figure><img src="assets/pose_visualization.svg" alt="pose"/><figcaption>Pose Estimation</figcaption></figure>
+        <figure><img src="assets/domain_adaptation_result.svg" alt="domain adaptation"/><figcaption>Domain Adaptation Comparison</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="section" id="bibtex">
+      <h2>BibTeX</h2>
+      <pre><code>@article{convmamspn_uggpst_2026,
+  title   = {TODO},
+  author  = {TODO},
+  journal = {TODO},
+  year    = {2026}
+}</code></pre>
+    </section>
+  </main>
+
+  <footer>© 2026 ConvMamSPN + UGGP-ST Project. Built with GitHub Pages.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
