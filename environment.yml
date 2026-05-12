@@ -1,4 +1,4 @@
-name: mambapose
+name: convmamspn
 channels:
   - pytorch
   - conda-forge

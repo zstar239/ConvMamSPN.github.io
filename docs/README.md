@@ -18,12 +18,10 @@ Then open `http://127.0.0.1:8000`.
 4. Select branch `main`.
 5. Select folder `/docs`.
 6. Save and wait for deployment.
-7. URL format: `https://zstar239.github.io/ConvMamSPN.github.io/`.
+7. URL format: `https://<username>.github.io/<repository-name>/`.
 
 ## TODO before camera-ready release
 
 - Replace placeholder figures in `docs/assets/`.
 - Add final paper/code/model links.
 - Update BibTeX with published metadata.
-
-- Code button is configured to open: `https://github.com/zstar239/ConvMamSPN.github.io`.
