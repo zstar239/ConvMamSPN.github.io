@@ -1,6 +1,8 @@
 # Uncertainty-Guided Geometric Pseudo-label Self-Training for Monocular Non-cooperative Spacecraft Pose Estimation with ConvMamSPN
 
 - This project currently only includes the complete project structure and placeholder code, and the complete code will be released after the paper is accepted.
+- This project currently only includes the complete project structure and placeholder code, and the complete code will be released after the paper is accepted.
+- This project currently only includes the complete project structure and placeholder code, and the complete code will be released after the paper is accepted.
 
 ## Environment Setup / 环境配置
 
