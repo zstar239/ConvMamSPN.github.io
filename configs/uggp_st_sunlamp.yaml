@@ -1,0 +1,8 @@
+project: UGGP-ST
+source_dataset: SPEED+
+target_domain: sunlamp
+data_root: ./datasets/SPEED+
+source_ckpt: ./checkpoints/convmamspn_source.pth
+pseudo_label_dir: ./results/pseudo_labels/sunlamp
+output_dir: ./results/uggp_st_sunlamp
+device: cuda
