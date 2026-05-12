@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConvMamSPN Visualization</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <h1>Pose Visualization Carousel</h1>
+    <p class="sub">Domains: speed / synthetic / sunlamp / lightbox</p>
+
+    <section class="carousel" aria-label="Pose visualizations">
+      <button id="prev" class="nav">‹</button>
+      <figure>
+        <img id="slide" src="assets/visual/speed.jpg" alt="speed visualization" />
+        <figcaption id="caption">speed</figcaption>
+      </figure>
+      <button id="next" class="nav">›</button>
+    </section>
+
+    <div class="dots" id="dots"></div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
