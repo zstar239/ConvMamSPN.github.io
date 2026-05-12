@@ -1,0 +1,20 @@
+name: convmamspn
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - numpy
+  - scipy
+  - pyyaml
+  - tqdm
+  - matplotlib
+  - opencv
+  - pip:
+      - torch
+      - torchvision
+      - timm
+      - mamba-ssm
+      - causal-conv1d

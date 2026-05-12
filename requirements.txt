@@ -1,0 +1,11 @@
+numpy
+scipy
+tqdm
+pyyaml
+opencv-python
+matplotlib
+torch
+torchvision
+timm
+mamba-ssm
+causal-conv1d
