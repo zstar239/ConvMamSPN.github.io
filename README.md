@@ -1,179 +1,97 @@
-# ConvMamSPN + UGGP-ST: Mamba-based Spacecraft 6D Pose Estimation with Geometric Pseudo-label Self-Training
+# Uncertainty-Guided Geometric Pseudo-label Self-Training for Monocular Non-cooperative Spacecraft Pose Estimation with ConvMamSPN
 
-This repository provides the official implementation of **ConvMamSPN** and **UGGP-ST** for spacecraft 6D pose estimation. ConvMamSPN is a lightweight keypoint-based pose estimation network with a ConvNeXt backbone and a Mamba-based hierarchical decoder. UGGP-ST is an uncertainty-guided geometric pseudo-label self-training framework for unsupervised domain adaptation from synthetic to real spacecraft images.
+## Environment Setup / 环境配置
 
-> Status: repository is being cleaned for public release. Core algorithm logic should remain unchanged; placeholders and TODO items are kept where assets or metadata are not yet publicly available.
+Please set up the environment according to `environment.yml`:
 
-## Highlights
+```bash
+conda env create -f environment.yml
+conda activate mambapose
+```
 
-- Keypoint heatmap based spacecraft 6D pose estimation
-- ConvNeXt backbone with Mamba-based hierarchical decoder
-- CrossScanMamba for directional long-range context modeling
-- MambaResBlock for efficient global-local feature refinement
-- PnP-based geometric pose recovery (e.g., EPnP / RANSAC PnP)
-- Uncertainty-guided pseudo-label filtering
-- Geometric consistency based pseudo-label validation
-- Teacher-student self-training for synthetic-to-real domain adaptation
-- Evaluation on SPEED / SPEED+ Lightbox and Sunlamp domains
+---
 
-## Repository Structure
+## Dataset Preparation / 数据集准备
+
+SPEED and SPEED+ are publicly available from official Stanford/SLAB pages.
+SPEED 和 SPEED+ 数据集可从官方 Stanford/SLAB 页面获取。
+
+- Stanford SLAB project page (SPEED / SPEED+):  
+  https://slab.stanford.edu/projects/speed
+- SPEED+ Stanford Digital Repository:  
+  https://purl.stanford.edu/wv398fc4383
+
+Notes / 说明：
+- This repository does not redistribute dataset files.  
+  本仓库不重新分发数据集文件。
+- Please download from official sources and organize locally.  
+  请从官方地址下载并在本地组织数据。
+
+---
+
+## Training ConvMamSPN / 训练 ConvMamSPN
+
+**No shell scripts are used in this project.**  
+**本项目不使用任何 `sh` 脚本进行训练。**
+
+Do **NOT** use:
+- `bash scripts/train_convmamspn.sh`
+- `bash scripts/test_convmamspn.sh`
+- `bash scripts/train_uggp_st.sh`
+
+Use Python entry files directly:
+
+```bash
+# source-domain training / 源域训练
+python main_single_stage.py
+
+# UGGP target-domain training / UGGP目标域训练
+python train_uggp.py
+```
+
+---
+
+## UGGP Workflow (Actual) / UGGP真实流程
+
+Current implementation / 当前实现：
+
+1. Train source-domain model with `main_single_stage.py`.  
+   先使用 `main_single_stage.py` 训练源域模型。
+2. Run UGGP training with `train_uggp.py`.  
+   再使用 `train_uggp.py` 进行 UGGP 训练。
+3. Teacher model generates pseudo labels online in real time to supervise the student model.  
+   训练过程中由教师模型**实时在线生成伪标签**监督学生模型。
+
+> There is **no separate offline pseudo-label generation stage**.
+> 当前流程**没有离线伪标签预生成步骤**。
+
+---
+
+## Current directory structure
 
 ```text
-ConvMamSPN-UGGP-ST/
-├── README.md
-├── LICENSE
-├── requirements.txt
-├── environment.yml
-├── .gitignore
-├── configs/
-│   ├── convmamspn_speed.yaml
-│   ├── convmamspn_speedplus.yaml
-│   ├── uggp_st_lightbox.yaml
-│   └── uggp_st_sunlamp.yaml
-├── datasets/
-│   └── README.md
-├── docs/
-│   ├── index.html
-│   ├── style.css
-│   ├── script.js
-│   ├── README.md
-│   └── assets/
-├── scripts/
-│   ├── train_convmamspn.sh
-│   ├── test_convmamspn.sh
-│   ├── train_uggp_st.sh
-│   └── eval_speedplus.sh
-├── src/
-│   ├── models/
-│   ├── datasets/
-│   ├── losses/
-│   ├── engine/
-│   ├── utils/
-│   └── pnp/
-├── tools/
-│   ├── visualize_keypoints.py
-│   ├── visualize_pose.py
-│   ├── generate_pseudo_labels.py
-│   └── evaluate_results.py
-├── checkpoints/
-│   └── README.md
-├── results/
-│   └── README.md
-└── citation.bib
+ConvMamSPN_UDA/
+├─ AM.yaml
+├─ EffcientMethod/
+├─ loaders/
+├─ log/
+├─ losses/
+├─ main_single_stage.py
+├─ main_single_stage_swisscube.py
+├─ models/
+├─ results/
+├─ src/
+├─ test_single_stage.py
+├─ test_swisscube_adi.py
+├─ train.json
+├─ train_uggp.py
+├─ txt2csv.py
+├─ utils/
+├─ visual/
+├─ 主干消融.log
+├─ 主干消融_CLEAN.csv
+├─ 主干消融_CLEAN.txt
+├─ 批量测试.py
+├─ 批量运行.py
+└─ 批量运行stu.py
 ```
-
-## Environment Setup
-
-```bash
-conda create -n convmamspn python=3.8
-conda activate convmamspn
-pip install -r requirements.txt
-```
-
-### Notes for `mamba-ssm`
-
-`mamba-ssm` and `causal-conv1d` may require CUDA/PyTorch version alignment. Please install versions compatible with your local environment, then verify with:
-
-```bash
-python -c "import torch, mamba_ssm; print(torch.__version__)"
-```
-
-## Dataset Preparation
-
-Please follow `datasets/README.md`.
-
-- SPEED / SPEED+ datasets must be requested/downloaded by users.
-- This repository does **not** redistribute dataset files.
-
-## Training ConvMamSPN
-
-```bash
-bash scripts/train_convmamspn.sh
-```
-
-Equivalent direct command:
-
-```bash
-python train.py --config configs/convmamspn_speed.yaml
-```
-
-## Testing ConvMamSPN
-
-```bash
-bash scripts/test_convmamspn.sh
-```
-
-Equivalent direct command:
-
-```bash
-python test.py --config configs/convmamspn_speedplus.yaml --checkpoint checkpoints/convmamspn.pth
-```
-
-## UGGP-ST Workflow
-
-```text
-Step 1: Train source-only model
-Step 2: Generate pseudo labels on target domain
-Step 3: Filter pseudo labels with uncertainty + geometric consistency
-Step 4: Self-train student model
-Step 5: Evaluate on Lightbox / Sunlamp
-```
-
-Reference script:
-
-```bash
-bash scripts/train_uggp_st.sh
-```
-
-## Model Weights
-
-Pre-trained weights will be released at: **TODO** (Google Drive / Baidu Netdisk / Hugging Face / GitHub Release).
-
-## Experimental Results (Placeholder)
-
-| Method | Domain | SPEED_t | SPEED_r | SPEED |
-|--------|--------|---------|---------|-------|
-| Source-only | Lightbox | TODO | TODO | TODO |
-| ConvMamSPN + UGGP-ST | Lightbox | TODO | TODO | TODO |
-| Source-only | Sunlamp | TODO | TODO | TODO |
-| ConvMamSPN + UGGP-ST | Sunlamp | TODO | TODO | TODO |
-
-## Visualizations
-
-Expected figure paths:
-
-- `docs/assets/architecture.png`
-- `docs/assets/uggp_st_pipeline.png`
-- `docs/assets/keypoint_visualization.png`
-- `docs/assets/pose_visualization.png`
-- `docs/assets/domain_adaptation_result.png`
-
-If missing, placeholder SVG assets are currently provided in `docs/assets/` and should be replaced before release.
-
-## Citation
-
-See `citation.bib`.
-
-```bibtex
-@article{convmamspn_uggpst_2026,
-  title   = {TODO: ConvMamSPN + UGGP-ST},
-  author  = {TODO},
-  journal = {TODO},
-  year    = {2026}
-}
-```
-
-## License
-
-The license will be updated before the official release.
-
-## GitHub Pages Deployment
-
-Detailed instructions are in `docs/README.md`. Quick steps:
-
-1. Push this repository to GitHub.
-2. Go to **Settings** → **Pages**.
-3. Set **Source** to **Deploy from a branch**.
-4. Set **Branch** to `main` and folder to `/docs`.
-5. Save and wait for deployment.
-6. Site URL is typically `https://<username>.github.io/<repository-name>/`.
