@@ -1,5 +1,4 @@
-# Uncertainty-Guided Geometric Pseudo-label Self-Training for Monocular Non-cooperative Spacecraft Pose Estimation with ConvMamSPN
-# 基于不确定性引导的几何伪标签自训练方法用于单目非合作航天器姿态估计
+# Uncertainty-Guided Geometric Pseudo-label Self-Training for Monocular Non-cooperative Spacecraft Pose Estimation with ConvMamSPN / 基于不确定性引导的几何伪标签自训练方法用于单目非合作航天器姿态估计
 
 - This project currently only includes the complete project structure and placeholder code, and the complete code will be released after the paper is accepted.
 - 本项目目前仅包含完整的项目结构和占位代码，完整代码将在论文被接收后发布。
