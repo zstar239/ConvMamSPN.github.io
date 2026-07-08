@@ -20,6 +20,7 @@
         <a href="#highlights">Highlights</a>
         <a href="#method">Method</a>
         <a href="#visualization">Visualization</a>
+        <a href="#spark2024">SPARK2024</a>
         <a href="#results">Results</a>
         <a href="#citation">BibTeX</a>
       </div>
@@ -151,6 +152,43 @@
         </p>
       </div>
       <div id="visualGrid" class="visual-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="spark2024" class="section section-narrow">
+      <div class="section-title">
+        <span class="eyebrow">SPARK2024</span>
+        <h2>Pose Visualization Video</h2>
+        <p class="section-lead">
+          Qualitative visualization on SPARK2024 sequences is provided for reference because the ground-truth test labels are not publicly available after the competition.
+        </p>
+      </div>
+
+      <div class="spark-layout">
+        <div class="video-shell">
+          <iframe
+            src="https://player.bilibili.com/player.html?bvid=BV1QcMq61E5r&page=1&autoplay=0&high_quality=1"
+            title="SPARK2024 pose visualization"
+            scrolling="no"
+            allow="fullscreen; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <a class="video-link" href="https://www.bilibili.com/video/BV1QcMq61E5r/" target="_blank" rel="noopener noreferrer">
+          Watch on Bilibili
+        </a>
+
+        <article class="prose-card spark-note">
+          <p>
+            Since the SPARK2024 competition has concluded, we currently do not have access to the ground-truth labels of the test sequences. Therefore, we do not report quantitative pose scores on this sequence. To help readers visually inspect the cross-domain generalization behavior of our model in the SPARK2024 setting, we provide a pose-estimation visualization video.
+          </p>
+          <p>
+            In the first part of the video, the upper row shows real image sequences captured in a hardware-in-the-loop environment, which are used to examine pose estimation performance under real-domain conditions. The lower row shows computer-rendered synthetic images as a visual reference for the training domain. In the second part, both rows show hardware-in-the-loop real image sequences: the upper row presents results after UGGP-based domain adaptation, while the lower row presents estimates from the source-only model trained without UGGP cross-domain adaptation.
+          </p>
+          <p>
+            Importantly, our method does not use temporal cues or multi-frame fusion during pose estimation. All poses in the visualization video are obtained by independent single-frame inference and then composed into a video. No task-specific object tracking, temporal filtering, or other post-processing is applied.
+          </p>
+        </article>
+      </div>
     </section>
 
     <section id="results" class="section section-narrow">
