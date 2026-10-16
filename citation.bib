@@ -1,7 +1,12 @@
-@article{convmamspn_uggpst_2026,
-  title   = {TODO: ConvMamSPN + UGGP-ST},
-  author  = {TODO},
-  journal = {TODO},
-  year    = {2026},
-  note    = {TODO: update DOI / volume / pages / URL after publication}
+@article{ZENG2026104514,
+title = {Uncertainty-guided geometric pseudo-label self-training for monocular pose estimation of known non-cooperative spacecraft with ConvMamSPN},
+journal = {Chinese Journal of Aeronautics},
+pages = {104514},
+year = {2026},
+issn = {1000-9361},
+doi = {https://doi.org/10.1016/j.cja.2026.104514},
+url = {https://www.sciencedirect.com/science/article/pii/S1000936126004528},
+author = {Xin ZENG and Hairong CHU and Guoliang WU and Miao XU and Dong ZHANG and Yuanfu YUAN and Lang YANG and Peixun LIU},
+keywords = {Spacecraft, Pose estimation, Domain adaptation, Mamba, Pseudo-label self-training, Embedded deployment},
+abstract = {Pose estimation of non-cooperative spacecraft is a key visual perception problem in space rendezvous and docking, on-orbit servicing, and debris removal. Monocular vision schemes have the advantages of simple configuration, low cost, and ease of deployment, but face domain discrepancy, severe illumination variation, weak texture, and real-time constraints. To address these issues, this paper proposes a monocular pose estimation method for known non-cooperative spacecraft in cross-domain scenarios. First, a Convolutional Mamba Spacecraft Pose Network (ConvMamSPN) is constructed as a lightweight representation framework. The network adopts ConvNeXt-Tiny to extract multi-scale features and introduces cross-scan Mamba Residual Blocks (MambaResBlocks) during feature fusion and decoding, thereby enhancing long-range contextual modeling and spatial detail recovery. Then, an Uncertainty-Guided Geometric Pseudo-label Self-Training (UGGP-ST) strategy is proposed. Under teacher–student self-training, keypoint uncertainty, geometric consensus verification, and reprojection consistency are jointly exploited to construct reliable target-domain pseudo-labels, thereby alleviating performance degradation between the synthetic and real target domains. Experimental results show that the proposed method achieves Near, Medium, and Overall Average Distance of Model Points with Indistinguishable Views (ADI)-0.1d accuracies of 70.68%, 68.50%, and 52.41% on SwissCube, respectively. It obtains an average score of 0.0146 on SPEED and achieves average scores of 0.0297 and 0.0465 on the Lightbox and Sunlamp scenarios of SPEED+, respectively, establishing state-of-the-art performance on the SPEED+ benchmark. Moreover, without using Satellite Hardware-in-the-loop Rendezvous Trajectories (SHIRT) images during training or adaptation, the model adapted on SPEED+ Lightbox achieves mean translation and rotation errors of 0.0769 m and 2.52∘, respectively, on SHIRT Lightbox trajectories. Meanwhile, ConvMamSPN achieves an FP16 inference speed of 24.65 Frames Per Second (FPS) on Jetson AGX Orin. These results demonstrate that the proposed method provides a favorable overall balance among pose estimation accuracy, cross-domain robustness, and feasibility for embedded deployment. The project code will be available at https://zstar239.github.io/ConvMamSPN.github.io/.}
 }
